@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>ミニToDoアプリ</title>
+</head>
+<body>
+  <h1>やることリスト</h1>
+
+  <input id="todoInput" type="text" placeholder="やることを入力" />
+  <button id="addBtn">追加</button>
+
+  <ul id="todoList"></ul>
+
+  <script>
+    const input = document.getElementById('todoInput');
+    const addBtn = document.getElementById('addBtn');
+    const list = document.getElementById('todoList');
+
+    addBtn.addEventListener('click', () => {
+      const text = input.value.trim();
+      if (!text) return;
+
+      const li = document.createElement('li');
+      li.textContent = text;
+
+      // クリックで削除
+      li.addEventListener('click', () => {
+        li.remove();
+      });
+
+      list.appendChild(li);
+      input.value = '';
+    });
+  </script>
+</body>
+</html>
