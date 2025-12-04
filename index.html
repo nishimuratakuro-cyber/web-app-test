@@ -2,39 +2,37 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>ミニToDoアプリ</title>
+  <title>ローカルメモアプリ</title>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: 20px auto; }
+    textarea { width: 100%; height: 300px; }
+    button { padding: 8px 16px; margin-top: 8px; }
+    .info { font-size: 12px; color: #555; margin-top: 4px; }
+  </style>
 </head>
 <body>
-  <h1>やることリスト</h1>
+  <h1>ローカルメモ</h1>
 
-  <input id="todoInput" type="text" placeholder="やることを入力" />
-  <button id="addBtn">追加</button>
+  <textarea id="memo"></textarea>
+  <br />
+  <button id="saveBtn">保存</button>
+  <button id="clearBtn">全削除</button>
 
-  <ul id="todoList"></ul>
+  <div class="info" id="status"></div>
 
   <script>
-    const input = document.getElementById('todoInput');
-    const addBtn = document.getElementById('addBtn');
-    const list = document.getElementById('todoList');
+    const MEMO_KEY = 'my_local_memo';
 
-    addBtn.addEventListener('click', () => {
-      const text = input.value.trim();
-      if (!text) return;
+    const textarea = document.getElementById('memo');
+    const saveBtn = document.getElementById('saveBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const status = document.getElementById('status');
 
-      const li = document.createElement('li');
-      li.textContent = text;
+    // 起動時に保存されたメモを読み込み
+    const saved = localStorage.getItem(MEMO_KEY);
+    if (saved !== null) {
+      textarea.value = saved;
+      status.textContent = '前回のメモを読み込みました。';
+    }
 
-      // クリックで削除
-      li.addEventListener('click', () => {
-        li.remove();
-      });
-
-      list.appendChild(li);
-      input.value = '';
-    });
-    <a href="memo-app.html">2つ目のメモアプリを開く</a>
-
-  </script>
-</body>
-</html>
-
+    /
